@@ -1,0 +1,14 @@
+Name: STATS BAYES ANOVA
+Dialog-Specs: STATS_BAYES_ANOVA.spd
+Command-Specs: STATS_BAYES_ANOVA.xml
+Code-Files: STATS_BAYES_ANOVA.R
+Misc-Files: extsyntax.css,markdown.html,IBMdialogicon.png
+Summary: Bayesian ANOVA
+Description: This procedure performs a Bayesian analysis of variables.
+Author: JKP, IBM SPSS
+Version: 1.0.0
+Product-Version: 18
+Date: 9/29/2015
+Categories: ANOVA, Bayesian
+Plugins: R
+R-Packages: BayesFactor

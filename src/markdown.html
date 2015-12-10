@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>STATS BAYES ANOVA Extension Command</title>
+
+<link rel="stylesheet" type="text/css" href="extsyntax.css" />
+
+</head>
+
+<body>
+<h1>STATS BAYES ANOVA Extension Command</h1>
+
+<p>Calculate Bayesian Analysis of Variance</p>
+<div class="syntax">
+<p>STATS BAYES ANOVA DEPENDENT = <em>dependent variable</em><sup>&#42;</sup><br/>
+INDEPFIXED = <em>fixed factors</em><br/>
+INDEPRANDOM = <em>random factors</em><br/>
+MODELS = ALLWITHMAIN<sup>&#42;&#42;</sup> or STEPDOWN or STEPUP or SINGLE or ALLMODELS</p>
+
+<p>/OPTIONS COMPARISON = <em>model number</em><br/>
+POSTERIORINDEX = <em>model number</em><br/>
+OMITPOSTERIORRANDOM = YES<sup>&#42;&#42;</sup> or NO<br/> 
+ITERATIONS = <em>number</em><br/>
+BAYESFACTORITERATIONS = <em>number</em><br/>
+PLOTMODELS = NO<sup>&#42;&#42;</sup> or YES<br/>
+PRIORSCALEFIXED = MEDIUM<sup>&#42;&#42;</sup> or WIDE or ULTRAWIDE or a number<br/>
+PRIORSCALERANDOM = MEDIUM<sup>&#42;&#42;</sup> or WIDE or ULTRAWIDE or a number<br/>
+MAXMODELS = <em>number</em><br/>
+</p>
+<p>/SAVE WORKSPACE = CLEAR<sup>&#42;&#42;</sup> or RETAIN</br>
+MODELFILE = "file specification"</br>
+</p>
+
+<p><sup>&#42;</sup> Required<br/>
+<sup>&#42;&#42;</sup> Default</p>
+</div>
+<p>STATS BAYES ANOVA /HELP prints this information and does nothing else.</p>
+
+<pre class="example"><code>STATS BAYES ANOVA DEPENDENT=y
+INDEPFIXED=x1 x2 INDEPRANDOM=z
+/OPTIONS COMPARISON=3.
+</code></pre>
+
+<p>Split files and weights are not honored by this procedure.
+Cases with missing values are omitted.</p>
+
+<p>The procedure calculates the Bayes factors and the posterior probabilities for
+a set of ANOVA models using various combinations of the fixed and random factor 
+variables as specified in the MODELS keyword.
+The distributions for a selected
+model can also be displayed.  The models are numbered for reference in the COMPARISON
+and POSTERIORINDEX keywords, so it is useful to first run the procedure without using them
+in order to see how the models are numbered.</p>
+
+<p><strong>DEPENDENT</strong>, <strong>INDEPFIXED</strong>, and
+<strong>INDEPRANDOM</strong> keywords specify the dependent and factor
+variable names.
+All factor variables must have a categorical (nominal or ordinal) measurement level.
+At least one fixed or random factor variable must be specified.</p>
+
+<p><strong>MODELS</strong> specifies the combinations of independent variables to be used.</p>
+<ul>
+<li><strong>ALLWITHMAIN</strong> produces results for all combinations of the variables
+where the main effects are included for the variables in interaction terms.  This is the default.</li>
+<li><strong>ALLMODELS</strong> produces results for all combinations of the factors.</li>
+<li><strong>STEPDOWN</strong> produces all the models where exactly one factor
+is omitted.</li>
+<li><strong>STEPUP</strong> produces all the models that include a single
+factor.</li>
+<li><strong>SINGLE</strong> produces a single model containing all the
+factors.  In this case, the COMPARISON, POSTERIORINDEX, and PLOTBAYESF
+settings do not apply, and the posterior distribution is always produced.
+</ul></p>
+
+<h2>OPTIONS</h2>
+
+<p><strong>COMPARISON</strong> specifies the base model used to calculate the
+Bayes factors.  By default, that is an intercept-only model plus any random
+factors.  Specify the
+model number to use it as the base instead.</p>
+
+<p><strong>POSTERIORINDEX</strong> specifies that the posterior distributions of
+the coefficients be displayed for the selected model number.  If this keyword
+is not specified, the posterior distributions are not produced.</p>
+
+<p>By default, the posterior distribution tables include all factors and interactions.
+Specify <strong>OMITPOSTERIORRANDOM</strong> = YES or NO to exclude or include
+the random factor values in the tables.
+</p>
+
+<p><strong>ITERATIONS</strong> specifies the number of iterations (samples) to
+use for the posterior distribution calculations.  The default value is 1000.</p>
+
+<p><strong>PRIORSCALEFIXED</strong> and <strong>PRIORSCALERANDOM</strong> specify the prior scales for the fixed and random factors</p>  Both default to MEDIUM.  You can use the listed keywords or enter
+numerical values.  MEDIUM means .7071; WIDE is 1; and ULTRAWIDE is 1.414.
+
+<p><strong>PLOTMODELS</strong> produces a plot of the Bayes factors.  With more than
+a few models, however, the plot becomes unreadable.</p>
+
+<p><strong>MAXMODELS</strong> specifies the maximum number of models to estimate.  If
+ALLMODELS is specified, the number to estimate can quickly become very large and
+take a long time to compute.  The default value is 10,000.</p>
+
+<p>Certain computations require numerical integration.  <strong>BAYESFACTORITERATIONS</strong>
+specifies the number of iterations for this process.  The default is 10,000.
+</p>
+
+<h2>SAVE</h2>
+
+<p><strong>WORKSPACE</strong> specifies whether the workspace should be cleared
+or retained after the procedure completes.  By default, it is cleared.</p>
+
+<p><strong>MODELFILE</strong> specifies a file name to which the model information will
+be written as an R workspace for later use.  No file is written if this
+keyword is not used.</p>
+
+<h3>Acknowledgements</h3>
+This procedure uses the R BayesFactor package.
+
+<p>Richard D. Morey and Jeffrey N. Rouder (2015). BayesFactor: Computation of Bayes
+  Factors for Common Designs.</br>
+  http://CRAN.R-project.org/package=BayesFactor
+</p>
+<p>See additional references in the dialog box help.</p>
+<p>&copy; Copyright IBM Corp. 1989, 2015</p>
+
+</body>
+
+</html>
+
