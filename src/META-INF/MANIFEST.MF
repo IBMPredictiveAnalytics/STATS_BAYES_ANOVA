@@ -6,7 +6,7 @@ Misc-Files: extsyntax.css,markdown.html,IBMdialogicon.png
 Summary: Bayesian ANOVA
 Description: This procedure performs a Bayesian analysis of variables.
 Author: JKP, IBM SPSS
-Version: 1.0.1
+Version: 1.0.2
 Product-Version: 18
 Date: 9/29/2015
 Categories: ANOVA, Bayesian
