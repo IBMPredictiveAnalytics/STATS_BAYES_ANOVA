@@ -1,4 +1,5 @@
 Name: STATS BAYES ANOVA
+Display-Name: Bayesian Analysis of Variance
 Dialog-Specs: STATS_BAYES_ANOVA.spd
 Command-Specs: STATS_BAYES_ANOVA.xml
 Code-Files: STATS_BAYES_ANOVA.R
